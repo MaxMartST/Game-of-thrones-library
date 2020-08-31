@@ -25,13 +25,27 @@ export default class GoService {
     }
 
     _transformCharacter(char) {
-        return {
-            name: char.name,
-            gender: char.gender,
-            born: char.born,
-            died: char.died,
-            culture: char.culture
+        const res = {
+            name: null,
+            gender: null,
+            born: null,
+            died: null,
+            culture: null
+        };
+
+        for (let key in char)
+        {
+            if (!res.hasOwnProperty(key)) {
+                continue;
+            }
+            if (char[key] === "") {
+                res[key] = "no data";
+            } else {
+                res[key] = char[key];
+            }
         }
+
+        return res;
     }
 
     _transformHouse(house) {

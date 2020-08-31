@@ -10,3 +10,6 @@
 .term {
     font-weight: bold;
 }
+.term-value {
+    text-align: right;
+}
