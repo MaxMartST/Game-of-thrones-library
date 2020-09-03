@@ -2,15 +2,26 @@ import React, { Component } from 'react';
 import {Col, Row, Container} from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
+import CharacterPage from '../characterPage';
+import ErrorMessage from '../errorMessage';
 import ItemList from '../itemList';
 import CharDetails from '../charDetails';
-import ErrorMessage from '../errorMessage';
+import gotService from '../../services/gotService';
 
 import './app.css';
 export default class App extends Component {
+    gotService = new gotService();
+
     state = {
         showRandomChar: true,
         error: false
+    }
+
+    componentDidCatch() {
+        console.log('error!');
+        this.setState({
+            error: true
+        });
     }
     
     toggleRandomChar = () => {
@@ -44,12 +55,29 @@ export default class App extends Component {
                             </button>
                         </Col>
                     </Row>
+                    <CharacterPage/>
                     <Row>
                         <Col md='6'>
-                            <ItemList />
+                            <ItemList 
+                                onItemSelected={this.onItemSelected}
+                                getData={this.gotService.getAllBooks}
+                                renderItem={(item) => item.name}
+                            />
                         </Col>
                         <Col md='6'>
-                            <CharDetails />
+                            <CharDetails charId={this.state.selectedChar}/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md='6'>
+                            <ItemList 
+                                onItemSelected={this.onItemSelected}
+                                getData={this.gotService.getAllHouses}
+                                renderItem={(item) => item.name}
+                            />
+                        </Col>
+                        <Col md='6'>
+                            <CharDetails charId={this.state.selectedChar}/>
                         </Col>
                     </Row>
                 </Container>
