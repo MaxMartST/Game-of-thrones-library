@@ -30,7 +30,7 @@ export default class GoService {
         return res.map(this._transformCharacter)
     }
 
-    getCharecter = async (id) => {
+    getCharacter = async (id) => {
         const character = await this.getResource(`/characters/${id}`);  
         return this._transformCharacter(character);      
     }
