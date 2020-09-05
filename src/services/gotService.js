@@ -15,12 +15,12 @@ export default class GoService {
     }
 
     getAllBooks = async () => {
-        const res = await this.getResource(`/books/`);
+        const res = await this.getResource(`/books`);
         return res.map(this._transformBook);
     }
 
     getBook = async (id) => {
-        const book = await this.getResource(`/book/${id}`);
+        const book = await this.getResource(`/books/${id}`);
         return this._transformBook(book);
     }
 
@@ -36,12 +36,12 @@ export default class GoService {
     }
 
     getAllHouses = async () => {
-        const res =await this.getResource(`/houses`);
+        const res =await this.getResource(`/houses/`);
         return res.map(this._transformHouse);
     }
 
     getHouse = async (id) => {
-        const house = this.getResource(`/houses/${id}`);
+        const house = this.getResource(`/houses/${id}/`);
         return this._transformHouse(house);
     }
 
