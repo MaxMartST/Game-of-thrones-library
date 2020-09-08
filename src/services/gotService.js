@@ -15,12 +15,12 @@ export default class GoService {
     }
 
     getAllBooks = async () => {
-        const res = await this.getResource(`/books`);
+        const res = await this.getResource(`/books/`);
         return res.map(this._transformBook);
     }
 
     getBook = async (id) => {
-        const book = await this.getResource(`/books/${id}`);
+        const book = await this.getResource(`/books/${id}/`);
         return this._transformBook(book);
     }
 
@@ -32,22 +32,34 @@ export default class GoService {
 
     getCharacter = async (id) => {
         const character = await this.getResource(`/characters/${id}`);  
+        console.log(character);
         return this._transformCharacter(character);      
     }
 
     getAllHouses = async () => {
-        const res =await this.getResource(`/houses/`);
+        const res = await this.getResource(`/houses/`);
         return res.map(this._transformHouse);
     }
 
     getHouse = async (id) => {
-        const house = this.getResource(`/houses/${id}/`);
+        const house = await this.getResource(`/houses/${id}`);
+        console.log(house);
         return this._transformHouse(house);
     }
 
     isSet(data) {
-        if (data) {
-            return data
+        let result;
+
+        if (typeof data == "string") {
+            result = data;
+        }
+
+        if (Array.isArray(data)) {
+            result = data.join(', ');
+        }
+
+        if (result) {
+            return result
         } else {
             return 'no data'
         }
@@ -76,7 +88,7 @@ export default class GoService {
             region: this.isSet(house.region),
             words: this.isSet(house.words),
             titles: this.isSet(house.titles),
-            ancestralWeapons: this.isSet(house.ancestralWeapons)
+            emblem: this.isSet(house.coatOfArms)
         };
     }
 

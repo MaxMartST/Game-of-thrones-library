@@ -44,7 +44,7 @@ export default class HousesPage extends Component {
                     <Field field='region' label='Region'/>
                     <Field field='words' label='Words'/>
                     <Field field='titles' label='Titles'/>
-                    <Field field='ancestralWeapons' label='Ancestral Weapons'/>
+                    <Field field='emblem' label='Emblem'/>
             </ItemDetails>
         )
 

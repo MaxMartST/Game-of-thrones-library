@@ -6,7 +6,7 @@ const Field = ({item, field, label}) => {
     return (
         <li className="list-group-item d-flex justify-content-between">
             <span className="term">{label}</span>
-            <span>{item[field]}</span>
+            <span className="term-value">{item[field]}</span>
         </li> 
     )
 }
@@ -33,7 +33,7 @@ export default class ItemDetails extends Component {
         const {itemId, getData} = this.props;
 
         if (!itemId) {
-            console.log(itemId);
+            //console.log(itemId);
             return;
         }
 
